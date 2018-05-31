@@ -1,4 +1,4 @@
-./.idea
-./out
-./ClosestPair.iml
-./output.txt
+.idea
+/out
+ClosestPair.iml
+output.txt
