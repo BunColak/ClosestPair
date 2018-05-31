@@ -69,6 +69,9 @@ public class ClosestPair {
         return min_pair;
     }
 
+    /*
+    Helper method, calculates the euclidian distance between two double arrays
+     */
     public static double euclidianDistance(double[] point1, double[] point2, int dimension) {
         double distance = 0;
         for (int i = 0; i < dimension; i++) {
@@ -78,6 +81,9 @@ public class ClosestPair {
         return Math.sqrt(distance);
     }
 
+    /*
+    Helper method, constructs the String to be printed
+     */
     public static String printPair(double[] point1, double[] point2, int dimension, int index1, int index2) {
         String pair = (index1 + 1) + ":";
         for (int i = 0; i < dimension; i++) {

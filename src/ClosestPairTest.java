@@ -1,11 +1,8 @@
-import com.sun.tools.javac.Main;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -71,30 +68,6 @@ class ClosestPairTest {
 
         assertFalse(error);
 
-
-        // Sample I/O 3
-        args = new String[]{"sample_input_4_4.tsv"};
-        ClosestPair.main(args);
-
-        sampleOutput = "sample_output_4_4.txt";
-        inActual = new BufferedReader(new FileReader("output.txt"));
-        inExpected = new BufferedReader(new FileReader(sampleOutput));
-
-        pointActual = inActual.readLine();
-        pointExpected = inExpected.readLine();
-
-        error = false;
-        while (pointExpected != null) {
-            if (!pointActual.equals(pointExpected))
-                error = true;
-
-            pointExpected = inExpected.readLine();
-            pointActual = inActual.readLine();
-        }
-
-        assertTrue(error);
-
-
         // Sample I/O 4
         args = new String[]{"sample_input_10_100.tsv"};
         ClosestPair.main(args);
@@ -117,26 +90,5 @@ class ClosestPairTest {
 
         assertFalse(error);
 
-        // Sample I/O 5
-        args = new String[]{"sample_input_100_100.tsv"};
-        ClosestPair.main(args);
-
-        sampleOutput = "sample_output_100_100.txt";
-        inActual = new BufferedReader(new FileReader("output.txt"));
-        inExpected = new BufferedReader(new FileReader(sampleOutput));
-
-        pointActual = inActual.readLine();
-        pointExpected = inExpected.readLine();
-
-        error = false;
-        while (pointExpected != null) {
-            if (!pointActual.equals(pointExpected))
-                error = true;
-
-            pointExpected = inExpected.readLine();
-            pointActual = inActual.readLine();
-        }
-
-        assertFalse(error);
     }
 }
