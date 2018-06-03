@@ -1,35 +1,33 @@
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClosestPairTest {
 
     @Test
-    void readsFiles() throws IOException {
-        String filepath = "sample_input_2_8.tsv";
-        assertNotNull(ClosestPair.getPoints(filepath));
+    void doesNotReadEmptyFiles() {
+        String filepath = "TestFiles/empty_file.txt";
+        assertEquals(-1, ClosestPair.validateInput(filepath));
     }
 
     @Test
-    void calculateDistance() {
-        double[] point1 = {0, 0};
-        double[] point2 = {3, 4};
-
-        assertEquals(5, ClosestPair.euclidianDistance(point1, point2, 2));
+    void realizesNonExistentFile() {
+        String filepath = "there_is_no_such_file.txt";
+        assertEquals(-2, ClosestPair.validateInput(filepath));
     }
 
     @Test
-    void printedFileIsCorrect() throws IOException {
+    void sampleOutputsAreCorrect() throws IOException {
         // Sample I/O 1
-        String[] args = {"sample_input_2_8.tsv"};
+        String[] args = {"TestFiles/sample_input_2_8.tsv"};
         ClosestPair.main(args);
 
-        String sampleOutput = "sample_output_2_8.txt";
-        BufferedReader inActual = new BufferedReader(new FileReader("output.txt"));
+        String sampleOutput = "TestFiles/sample_output_2_8.txt";
+        BufferedReader inActual = new BufferedReader(new FileReader("TestFiles/sample_input_2_8_output.txt"));
         BufferedReader inExpected = new BufferedReader(new FileReader(sampleOutput));
 
         String pointActual = inActual.readLine();
@@ -47,11 +45,11 @@ class ClosestPairTest {
         assertFalse(error);
 
         // Sample I/O 2
-        args = new String[]{"sample_input_3_1000.tsv"};
+        args = new String[]{"TestFiles/sample_input_3_1000.tsv"};
         ClosestPair.main(args);
 
-        sampleOutput = "sample_output_3_1000.txt";
-        inActual = new BufferedReader(new FileReader("output.txt"));
+        sampleOutput = "TestFiles/sample_output_3_1000.txt";
+        inActual = new BufferedReader(new FileReader("TestFiles/sample_input_3_1000_output.txt"));
         inExpected = new BufferedReader(new FileReader(sampleOutput));
 
         pointActual = inActual.readLine();
@@ -69,11 +67,11 @@ class ClosestPairTest {
         assertFalse(error);
 
         // Sample I/O 4
-        args = new String[]{"sample_input_10_100.tsv"};
+        args = new String[]{"TestFiles/sample_input_10_100.tsv"};
         ClosestPair.main(args);
 
-        sampleOutput = "sample_output_10_100.txt";
-        inActual = new BufferedReader(new FileReader("output.txt"));
+        sampleOutput = "TestFiles/sample_output_10_100.txt";
+        inActual = new BufferedReader(new FileReader("TestFiles/sample_input_10_100_output.txt"));
         inExpected = new BufferedReader(new FileReader(sampleOutput));
 
         pointActual = inActual.readLine();
@@ -90,5 +88,26 @@ class ClosestPairTest {
 
         assertFalse(error);
 
+        args = new String[]{"TestFiles/another_test.txt"};
+        ClosestPair.main(args);
+
+        sampleOutput = "TestFiles/another_test_output_1.txt";
+        inActual = new BufferedReader(new FileReader("TestFiles/another_test_output.txt"));
+        inExpected = new BufferedReader(new FileReader(sampleOutput));
+
+        pointActual = inActual.readLine();
+        pointExpected = inExpected.readLine();
+
+        error = false;
+        while (pointExpected != null) {
+            if (!pointActual.equals(pointExpected))
+                error = true;
+
+            pointExpected = inExpected.readLine();
+            pointActual = inActual.readLine();
+        }
+
+        assertFalse(error);
     }
+
 }
